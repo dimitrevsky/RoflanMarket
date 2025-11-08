@@ -3,9 +3,7 @@ import ParentComponent from "~/components/ParentComponent.vue";
 </script>
 
 <template>
-  <div>
-    <ParentComponent />
-  </div>
+  <ParentComponent />
 </template>
 
 <style scoped></style>
