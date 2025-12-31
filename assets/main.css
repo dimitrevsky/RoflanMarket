@@ -14,9 +14,12 @@
 :root {
   --font-family-Inter: Inter, Arial;
   --accent-color: #f4f4f5;
+  --accent-color-text: #ccc;
+  --border-color: #dfac03;
 }
 
 body {
   font-family: var(--font-family-Inter);
   padding: 0 5px;
+  background-color: #fafafa;
 }

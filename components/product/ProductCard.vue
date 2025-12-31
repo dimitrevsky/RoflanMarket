@@ -4,12 +4,22 @@ import type { Product } from "~/types/product";
 defineProps<{
   product: Product;
 }>();
+
+const imgLoaded = ref(false);
 </script>
 
 <template>
   <div class="product-card">
     <div class="product-card__img_wrapper">
-      <img class="img" :src="product.thumbnail" :alt="product.title" />
+      <img
+        class="img"
+        :src="product.thumbnail"
+        :alt="product.title"
+        @load="imgLoaded = true"
+        v-show="imgLoaded"
+      />
+
+      <div v-if="!imgLoaded" class="img-lazy"></div>
     </div>
     <div class="product-card__title_wrapper">
       <div class="display-flex">
@@ -36,7 +46,7 @@ defineProps<{
   width: 230px;
   padding: 12px;
   border-radius: 16px;
-  border: 3px solid #dfac03;
+  border: 3px solid var(--border-color);
 
   .product-card__img_wrapper {
     display: flex;
@@ -49,6 +59,12 @@ defineProps<{
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+
+    .img-lazy {
+      width: 200px;
+      height: 200px;
+      animation: img-lazy 1.5s infinite;
     }
   }
 
@@ -94,6 +110,23 @@ defineProps<{
         font-size: 12px;
       }
     }
+  }
+}
+
+@keyframes img-lazy {
+  0%,
+  100% {
+    background: #ffffff;
+  }
+
+  50% {
+    background: #a1a1aa;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .product-card {
+    width: 200px;
   }
 }
 </style>

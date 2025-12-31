@@ -3,7 +3,17 @@ import ParentComponent from "~/components/ParentComponent.vue";
 </script>
 
 <template>
-  <ParentComponent />
+  <Haeder />
+
+  <main>
+    <ParentComponent />
+  </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+</style>
