@@ -16,7 +16,7 @@ function onCategoryChange(event: Event) {
 <template>
   <aside class="aside">
     <select :value="filters.category ?? ''" @change="onCategoryChange">
-      <option selected="true" value="">Все категории</option>
+      <option value="" selected="true">Все категории</option>
       <option value="beauty">Косметика</option>
       <option value="furniture">Мебель</option>
       <option value="groceries">Продукты</option>
