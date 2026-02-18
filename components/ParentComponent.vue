@@ -1,12 +1,16 @@
 <script lang="ts" setup>
 import type { Product } from "~/types/product";
 import type { ProductFilter } from "~/types/filter";
+import type { SortOption } from "~/types/sort";
 import ProductCard from "./product/ProductCard.vue";
 import AsideFilter from "./AsideFilter.vue";
 
 const products = ref<Product[]>([]);
 const isLoading = ref(true);
 const error = ref<string | null>(null);
+const searchQuery = useState<string>("searchQuery");
+
+const sortBy = ref<SortOption>("none");
 
 // изначальное состояние
 const filters = ref<ProductFilter>({
@@ -33,30 +37,50 @@ async function fetchProductsList() {
 }
 
 // фильтруем говно
-const filteredProducts = computed(() => {
-  return products.value.filter((product) => {
-    if (filters.value.category !== null && product.category !== filters.value.category) {
-      return false; //выкидываем нахуй не нужное
+const filteredProducts = computed<Product[]>(() => {
+  let result = products.value.filter((product) => {
+    if (searchQuery.value && !product.title.toLowerCase().includes(searchQuery.value.toLowerCase())) {
+      return false; //поисковик
+    }
+
+    if (filters.value.category && product.category !== filters.value.category) {
+      return false; //выкидываем нахуй ненужные категории
     }
 
     if (filters.value.minPrice !== null && product.price < filters.value.minPrice) {
-      return false; //выкидываем нахуй ниже значения
+      return false; //оставляем мин цену
     }
 
     if (filters.value.maxPrice !== null && product.price > filters.value.maxPrice) {
-      return false; //выкидываем нахуй выше значения
+      return false; //оставляем макс цену
     }
 
-    return true; //возвращаем удовлетворяющее
+    return true; //иначе ничо
   });
+
+  // сортировка
+  if (sortBy.value === "price-desc") {
+    result = result.slice().sort((a, b) => b.price - a.price); //цена по убыванию
+  }
+  if (sortBy.value === "rating-desc") {
+    result = result.slice().sort((a, b) => b.rating - a.rating); //цена по УВЫЫЫЫванию
+  }
+  if (sortBy.value === "rating-asc") {
+    result = result.slice().sort((a, b) => a.rating - b.rating); //рейтинг по возрастанию
+  }
+  if (sortBy.value === "price-asc") {
+    result = result.slice().sort((a, b) => a.price - b.price); //рейтминг по УВЫЫЫЫванию
+  }
+
+  return result;
 });
 
-onMounted(fetchProductsList); //коллбек запроса
+onMounted(fetchProductsList); //КАЛЛЛбек запроса
 </script>
 
 <template>
-  <!-- связываем эмит -->
-  <AsideFilter v-model:filters="filters" />
+  <!-- связь с эмит -->
+  <AsideFilter v-model:filters="filters" v-model:sort-by="sortBy" />
 
   <section class="catalog">
     <div class="products-title">
@@ -73,12 +97,7 @@ onMounted(fetchProductsList); //коллбек запроса
         <h3>ниче не нашлось! (°□°;)</h3>
       </div>
 
-      <ProductCard
-        v-else
-        v-for="product in filteredProducts"
-        :key="product.id"
-        :product="product"
-      />
+      <ProductCard v-else v-for="product in filteredProducts" :key="product.id" :product="product" />
     </div>
   </section>
 </template>

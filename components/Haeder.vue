@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+const searchQuery = useState<string>("searchQuery", () => "");
+
+function handleSearch(value: string) {
+  searchQuery.value = value.trim();
+}
+</script>
+
 <template>
   <header class="header">
     <div class="header-logo">
@@ -8,7 +16,13 @@
     <div class="header-search__wrapper">
       <label>
         <Icon class="header-search__icon" name="tabler:search" style="color: #a1a1a1" size="20px" />
-        <input class="header-search" type="search" placeholder="Найти" />
+        <input
+          class="header-search"
+          v-model="searchQuery"
+          type="search"
+          placeholder="Найти"
+          @keyup.enter="handleSearch(searchQuery)"
+        />
       </label>
     </div>
   </header>
