@@ -20,6 +20,12 @@
 
 body {
   font-family: var(--font-family-Inter);
-  padding: 0 5px;
+  padding: 0 15px;
   background-color: #fafafa;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }

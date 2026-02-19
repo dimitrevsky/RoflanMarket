@@ -34,7 +34,7 @@ const imgLoaded = ref(false);
         <span>{{ product.title }}</span>
       </div>
       <div class="product-card__rating">
-        <Icon name="line-md:star-alt-filled" class="product-card__rating_icon" />
+         <img class="product-card__rating_icon" src="~/assets/img/RaitingIcon.svg" alt="rating icon">
         <span>{{ product.rating }}</span>
       </div>
     </div>
@@ -103,8 +103,7 @@ const imgLoaded = ref(false);
     .product-card__rating {
       .product-card__rating_icon {
         vertical-align: middle;
-        font-size: 14px;
-        color: #ffae00;
+        margin-right: 4px;
       }
       span {
         font-size: 12px;
