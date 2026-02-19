@@ -15,7 +15,7 @@ function handleSearch(value: string) {
 
     <div class="header-search__wrapper">
       <label>
-        <img src="~/assets/img/searhIcon.svg" class="header-search__icon" alt="search icon" />
+        <img src="~/assets/img/SearchIcon.svg" class="header-search__icon" alt="search icon" />
         <input
           class="header-search"
           v-model="searchQuery"

@@ -34,7 +34,7 @@ const imgLoaded = ref(false);
         <span>{{ product.title }}</span>
       </div>
       <div class="product-card__rating">
-         <img class="product-card__rating_icon" src="~/assets/img/RaitingIcon.svg" alt="rating icon">
+         <img class="product-card__rating_icon" src="~/assets/img/RatingIcon.svg" alt="rating icon">
         <span>{{ product.rating }}</span>
       </div>
     </div>
