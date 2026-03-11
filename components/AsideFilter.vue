@@ -32,7 +32,7 @@ function onSortChange(event: Event) {
 
 <template>
   <aside class="aside">
-    <select class="genre-select" :value="filters.category ?? ''" @change="onCategoryChange">
+    <select class="select" :value="filters.category ?? ''" @change="onCategoryChange">
       <option value="" selected="true">Все категории</option>
       <option value="beauty">Косметика</option>
       <option value="furniture">Мебель</option>
@@ -42,7 +42,7 @@ function onSortChange(event: Event) {
     <input class="price-input" type="number" placeholder="Мин. цена" v-model.number="filters.minPrice" />
     <input class="price-input" type="number" placeholder="Макс. цена" v-model.number="filters.maxPrice" />
 
-    <select class="genre-select" :value="sortBy" @change="onSortChange">
+    <select class="select" :value="sortBy" @change="onSortChange">
       <option value="none">Без фильтрации</option>
       <option value="price-desc">Цена ↓</option>
       <option value="price-asc">Цена ↑</option>
@@ -64,13 +64,14 @@ function onSortChange(event: Event) {
   border-radius: 32px;
 }
 
-.genre-select {
+.select {
   width: 100%;
   margin-bottom: 12px;
   padding: 3px 5px;
   border: none;
   border: 2px solid var(--border-color);
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .genre-select:focus-visible {

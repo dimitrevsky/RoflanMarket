@@ -25,10 +25,14 @@ function handleSearch(value: string) {
         />
       </label>
     </div>
+
+    <div class="authorization">
+      <button class="sign-in__button">Войти</button>
+    </div>
   </header>
 </template>
 
-<style lang="postcss" scoped>
+<style scoped>
 .header {
   display: flex;
   gap: 24px;
@@ -36,6 +40,19 @@ function handleSearch(value: string) {
   max-width: 100%;
   border-bottom: 1px solid var(--accent-color);
   padding: 20px 5%;
+}
+
+.sign-in__button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background-color: #dfc91c;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sign-in__button:hover {
+  background-color: #c8b018;
 }
 
 .header-logo {

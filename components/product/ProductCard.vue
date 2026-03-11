@@ -9,36 +9,32 @@ const imgLoaded = ref(false);
 </script>
 
 <template>
-  <div class="product-card">
-    <div class="product-card__img_wrapper">
-      <img
-        class="img"
-        :src="product.thumbnail"
-        :alt="product.title"
-        @load="imgLoaded = true"
-        v-show="imgLoaded"
-      />
+  <NuxtLink :to="`/product/${product.id}`">
+    <div class="product-card">
+      <div class="product-card__img_wrapper">
+        <img class="img" :src="product.thumbnail" :alt="product.title" @load="imgLoaded = true" v-show="imgLoaded" />
 
-      <div v-if="!imgLoaded" class="img-lazy"></div>
-    </div>
-    <div class="product-card__title_wrapper">
-      <div class="display-flex">
-        <div class="product-card__price">
-          <span>{{ product.price + "$" }}</span>
+        <div v-if="!imgLoaded" class="img-lazy"></div>
+      </div>
+      <div class="product-card__title_wrapper">
+        <div class="display-flex">
+          <div class="product-card__price">
+            <span>{{ product.price + "$" }}</span>
+          </div>
+          <div class="product-card__category">
+            <span>{{ product.category }}</span>
+          </div>
         </div>
-        <div class="product-card__category">
-          <span>{{ product.category }}</span>
+        <div class="product-card__title">
+          <span>{{ product.title }}</span>
+        </div>
+        <div class="product-card__rating">
+          <img class="product-card__rating_icon" src="~/assets/img/RatingIcon.svg" alt="rating icon" />
+          <span>{{ product.rating }}</span>
         </div>
       </div>
-      <div class="product-card__title">
-        <span>{{ product.title }}</span>
-      </div>
-      <div class="product-card__rating">
-         <img class="product-card__rating_icon" src="~/assets/img/RatingIcon.svg" alt="rating icon">
-        <span>{{ product.rating }}</span>
-      </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style scoped>
@@ -47,6 +43,7 @@ const imgLoaded = ref(false);
   padding: 12px;
   border-radius: 16px;
   border: 3px solid var(--border-color);
+  cursor: pointer;
 
   .product-card__img_wrapper {
     display: flex;
@@ -81,14 +78,14 @@ const imgLoaded = ref(false);
 
     .product-card__price {
       span {
-        color: rgb(187, 0, 103);
+        color: var(--font-color-price);
         font-weight: 500;
       }
     }
 
     .product-card__category {
       span {
-        color: #a1a1aa;
+        color: var(--font-color-category);
         font-size: 14px;
       }
     }
@@ -96,7 +93,8 @@ const imgLoaded = ref(false);
     .product-card__title {
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
       overflow: hidden;
     }
 

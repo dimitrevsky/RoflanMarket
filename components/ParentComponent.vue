@@ -109,10 +109,6 @@ onMounted(fetchProductsList); //КАЛЛЛбек запроса
   width: 100%;
 }
 
-.not-founded {
-  color: var(--accent-color-text);
-}
-
 .product-table {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(231px, 1fr));

@@ -7,4 +7,8 @@ export interface Product {
     category?: string
     images?: string[]
     thumbnail?: string
+    discountPercentage?: number
+    stock?: number
+    tags?: string[]
+    reviews?: string[]
 }
