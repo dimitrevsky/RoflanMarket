@@ -8,7 +8,7 @@ const props = defineProps<{ review: any }>();
       <img src="~/assets/img/noAvatarImg.svg" alt="" />
 
       <strong>{{ props.review.reviewerName }}</strong>
-      <span> {{ props.review.reviewerEmail }} </span>
+      <span class="review-card__email"> {{ props.review.reviewerEmail }} </span>
       <time>{{ new Date(props.review.date).toLocaleDateString() }}</time>
       <span class="review-card__rating">{{ props.review.rating }}/5</span>
     </div>
@@ -44,5 +44,11 @@ const props = defineProps<{ review: any }>();
 .review-card__text {
   margin-top: 8px;
   font-size: 14px;
+}
+
+@media (max-width: 573px) {
+  .review-card__email {
+    display: none;
+  }
 }
 </style>

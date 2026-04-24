@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const searchQuery = useState<string>("searchQuery", () => "");
 
+const authStore = useAuthStore();
+
 function handleSearch(value: string) {
   searchQuery.value = value.trim();
 }
@@ -27,7 +29,13 @@ function handleSearch(value: string) {
     </div>
 
     <div class="authorization">
-      <button class="sign-in__button">Войти</button>
+      <template v-if="authStore.isLoggedIn">
+        <img :src="authStore.user?.image" :alt="authStore.user?.firstName" class="avatar" />
+        <button class="sign-out__button" @click="authStore.logout()">Выйти</button>
+      </template>
+      <NuxtLink v-else to="/login">
+        <button class="sign-in__button">Войти</button>
+      </NuxtLink>
     </div>
   </header>
 </template>
@@ -39,7 +47,7 @@ function handleSearch(value: string) {
   max-height: 88px;
   max-width: 100%;
   border-bottom: 1px solid var(--accent-color);
-  padding: 20px 5%;
+  padding: 20px 10px;
 }
 
 .sign-in__button {
@@ -49,6 +57,19 @@ function handleSearch(value: string) {
   background-color: #dfc91c;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.sign-out__button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background-color: #e22a00;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sign-out__button:hover {
+  background-color: #a21800;
 }
 
 .sign-in__button:hover {
@@ -101,5 +122,18 @@ function handleSearch(value: string) {
   &::-webkit-search-cancel-button {
     -webkit-appearance: none;
   }
+}
+
+.authorization {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 </style>
