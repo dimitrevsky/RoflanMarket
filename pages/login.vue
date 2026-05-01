@@ -37,8 +37,18 @@ const { data: usersList } = await useFetch<usersResponse>("https://dummyjson.com
   <section class="login-wrapper">
     <form class="login-form" @submit.prevent="handleSubmit">
       <div class="sub-header">
-        <img src="~/assets/img/RoflLogo.png" alt="" />
-        <h2 class="login-title">Rofl SignIn</h2>
+        <div class="back-btn__wrapper">
+          <NuxtLink to="/">
+            <button class="back-btn">
+              <img src="~/assets/img/BackArrowImg.svg" alt="home" />
+              <span>Назад</span>
+            </button>
+          </NuxtLink>
+        </div>
+        <div class="sub-header__title">
+          <img src="~/assets/img/RoflLogo.png" alt="" />
+          <h2 class="login-title">Rofl SignIn</h2>
+        </div>
       </div>
       <input
         class="input input-login"
@@ -82,21 +92,44 @@ const { data: usersList } = await useFetch<usersResponse>("https://dummyjson.com
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: minmax(400px, 100%);
   margin: 0 auto;
 }
 
 .login-form {
+  position: relative;
   border: 2px solid var(--border-color);
   padding: 24px;
   border-radius: 32px;
+  width: 500px;
 }
 
 .sub-header {
   display: flex;
+  width: 100%;
   align-items: center;
-  justify-self: center;
+  justify-content: center;
   margin-bottom: 10px;
+}
+
+.sub-header__title {
+  display: flex;
+  align-items: center;
+}
+
+.back-btn__wrapper {
+  position: absolute;
+  display: flex;
+  left: 24px;
+  top: 27px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
 
 .input {
@@ -116,10 +149,14 @@ const { data: usersList } = await useFetch<usersResponse>("https://dummyjson.com
   width: 100%;
   padding: 8px;
   border: none;
-  background-color: var(--border-color);
+  background-color: var(--accent-main-theme-color);
   color: #000;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.sign-in:hover {
+  background-color: #c8b018;
 }
 
 .input-invalid {

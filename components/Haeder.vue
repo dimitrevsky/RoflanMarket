@@ -54,7 +54,7 @@ function handleSearch(value: string) {
   padding: 12px 24px;
   border: none;
   border-radius: 12px;
-  background-color: #dfc91c;
+  background-color: var(--accent-main-theme-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

@@ -15,8 +15,18 @@ interface LoginResponse {
 }
 
 export const useAuthStore = defineStore("auth", () => {
+  const tokenCookie = useCookie<string | null>("auth_token", {
+    maxAge: 60 * 60, // 1 час остаемся на акке, потом авто logout
+    sameSite: "lax", // для безопасности, чтобы печеньки не отправлялись на сторонние сайты
+  });
+
   const user = ref<User | null>(null);
-  const token = ref<string | null>(null);
+  const token = computed({
+    get: () => tokenCookie.value,
+    set: (val) => {
+      tokenCookie.value = val;
+    },
+  });
 
   const isLoggedIn = computed(() => !!token.value);
 
@@ -38,10 +48,20 @@ export const useAuthStore = defineStore("auth", () => {
     });
   }
 
+  async function init(): Promise<void> {
+    if (token.value) {
+      try {
+        await fetchUser();
+      } catch {
+        logout();
+      }
+    }
+  }
+
   function logout(): void {
     user.value = null;
     token.value = null;
   }
 
-  return { user, token, isLoggedIn, login, logout };
+  return { user, token, isLoggedIn, login, logout, init };
 });

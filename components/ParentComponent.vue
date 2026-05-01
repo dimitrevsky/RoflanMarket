@@ -110,11 +110,10 @@ onMounted(fetchProductsList); //КАЛЛЛбек запроса
 }
 
 .product-table {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(231px, 1fr));
-  gap: 24px 16px;
-  justify-content: flex-start;
-  padding-bottom: 40px;
+  display: flex;
+  width: 100%;
+  gap: 3px;
+  flex-wrap: wrap;
 }
 
 .products-title {

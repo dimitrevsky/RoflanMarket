@@ -3,7 +3,7 @@ import ReviewCard from "~/components/reviews/ReviewCard.vue";
 import type { Product } from "~/types/product";
 
 const route = useRoute();
-const id = Number(route.params.id);
+const id = Number(route.params.slug?.toString().split("-").at(-1));
 
 const { data: product, pending } = await useAsyncData<Product | null>(`product-${id}`, async () => {
   if (!id) return null;

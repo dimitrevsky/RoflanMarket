@@ -9,7 +9,7 @@ const imgLoaded = ref(false);
 </script>
 
 <template>
-  <NuxtLink :to="`/product/${product.id}`">
+  <NuxtLink :to="`/product/${toSlug(product.title)}-${product.id}`">
     <div class="product-card">
       <div class="product-card__img_wrapper">
         <img class="img" :src="product.thumbnail" :alt="product.title" @load="imgLoaded = true" v-show="imgLoaded" />
